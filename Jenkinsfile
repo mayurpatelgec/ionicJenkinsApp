@@ -24,8 +24,9 @@ pipeline {
 
    stage('APK Sign') {
    steps {
-      sh 'jarsigner -storepass your_password -keystore keys/yourkey.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk nameApp'
-   }
+          echo 'APK Sign'
+      // sh 'jarsigner -storepass your_password -keystore keys/yourkey.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk nameApp'
+  //  }
    }
 
    stage('Stage Web Build') {
@@ -35,9 +36,9 @@ pipeline {
   }
 
    stage('Publish Firebase Web') {
-      steps {
-      sh 'firebase deploy --token "Your Token Key"'
-   }
+  //     steps {
+  //     sh 'firebase deploy --token "Your Token Key"'
+  //  }
   }
 
    stage('Publish iOS') {
