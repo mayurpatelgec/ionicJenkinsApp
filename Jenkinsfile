@@ -9,16 +9,27 @@ pipeline {
           sh 'npm install'
         }
       }
-
       stage('SonarQube analysis') {
-        
-          // requires SonarQube Scanner 2.8+
-          def scannerHome = tool 'sonarscanner';
+        steps {
+          script {
+            // requires SonarQube Scanner 2.8+
+            scannerHome = tool 'sonarscanner';
+          }
           withSonarQubeEnv('sonarqubeserver') {
             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ionicJenkins -Dsonar.sources=./src -Dsonar.language=ts"
           }
+        }
+    }
+
+      // stage('SonarQube analysis') {
         
-      }
+      //     // requires SonarQube Scanner 2.8+
+      //     def scannerHome = tool 'sonarscanner';
+      //     withSonarQubeEnv('sonarqubeserver') {
+      //       sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ionicJenkins -Dsonar.sources=./src -Dsonar.language=ts"
+      //     }
+        
+      // }
 
       stage('IOS Build') {
         steps {
