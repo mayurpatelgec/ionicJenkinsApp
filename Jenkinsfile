@@ -11,13 +11,13 @@ pipeline {
       }
 
       stage('SonarQube analysis') {
-        steps {
+        
           // requires SonarQube Scanner 2.8+
           def scannerHome = tool 'SonarQube Scanner 3.2.0.1227';
           withSonarQubeEnv('SonarQube Server') {
             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ionicJenkins -Dsonar.sources=./src -Dsonar.language=ts"
           }
-        }
+        
       }
 
       stage('IOS Build') {
